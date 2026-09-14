@@ -1,26 +1,104 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource/noto-sans-myanmar/400.css";
+@import "@fontsource/noto-sans-myanmar/500.css";
+@import "@fontsource/noto-sans-myanmar/600.css";
+@import "@fontsource/noto-sans-myanmar/700.css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f8f5;
+  --foreground: #1c3028;
+  --card: #ffffff;
+  --card-foreground: #1c3028;
+  --popover: #ffffff;
+  --popover-foreground: #1c3028;
+  --primary: #216047;
+  --primary-foreground: #ffffff;
+  --secondary: #e8efe9;
+  --secondary-foreground: #254d3a;
+  --muted: #edf1ec;
+  --muted-foreground: #5e6e64;
+  --accent: #e1eee5;
+  --accent-foreground: #214f38;
+  --destructive: #b42336;
+  --border: #d9e2d9;
+  --input: #c7d4ca;
+  --ring: #397857;
+  --radius: 0.75rem;
+  --hero: #163f31;
+  --hero-foreground: #f4faf5;
+}
+
+.dark {
+  --background: #111c17;
+  --foreground: #eaf2ec;
+  --card: #1a2921;
+  --card-foreground: #eaf2ec;
+  --popover: #1a2921;
+  --popover-foreground: #eaf2ec;
+  --primary: #94d5ae;
+  --primary-foreground: #102c1d;
+  --secondary: #263b2e;
+  --secondary-foreground: #d8eadc;
+  --muted: #23352a;
+  --muted-foreground: #aec2b4;
+  --accent: #2c4635;
+  --accent-foreground: #d9f0df;
+  --destructive: #ff98a4;
+  --border: #354b3d;
+  --input: #435d4b;
+  --ring: #94d5ae;
+  --hero: #173b2d;
+  --hero-foreground: #f4faf5;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--card);
+  --color-line: var(--border);
+  --color-brand: var(--primary);
+  --color-brand-strong: var(--primary);
+  --color-hero: var(--hero);
+  --color-hero-foreground: var(--hero-foreground);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: "Noto Sans Myanmar", "Myanmar Text", sans-serif;
+  --font-serif: "Noto Sans Myanmar", "Myanmar Text", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  body { @apply bg-background text-foreground font-sans; line-height: 1.85; }
+  h1, h2, h3 { line-height: 1.65; font-weight: 600; text-wrap: pretty; }
+  button, input, select, textarea { font: inherit; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+  a:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; border-radius: 4px; }
+  select option { background: var(--popover); color: var(--popover-foreground); }
+  ::selection { background: var(--accent); color: var(--accent-foreground); }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
