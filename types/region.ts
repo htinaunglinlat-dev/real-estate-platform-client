@@ -1,3 +1,14 @@
+export interface RegionResponse {
+  id: number;
+  name_en: string;
+  name_mm: string;
+  slug: string;
+}
+
+export interface TownshipResponse extends RegionResponse {
+  region_id: number;
+}
+
 export interface RegionOption {
   id: number;
   nameEn: string;

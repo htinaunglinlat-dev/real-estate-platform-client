@@ -47,7 +47,7 @@ export function LocationSelect({
           {unavailable && <NativeSelectOption value={value} disabled>Selected {label.toLowerCase()} unavailable</NativeSelectOption>}
           {options.map((option) => (
             <NativeSelectOption key={option.id} value={option.id}>
-              {option.nameMm ? `${option.nameMm} (${option.nameEn})` : option.nameEn}
+              {option.nameEn}
             </NativeSelectOption>
           ))}
         </NativeSelect>

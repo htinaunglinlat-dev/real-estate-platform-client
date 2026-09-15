@@ -5,12 +5,10 @@ import { Menu } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import { useState } from "react";
 
@@ -41,9 +39,7 @@ export function MobileNav() {
         <nav aria-label="Mobile navigation" className="grid gap-2 px-4">
           {[
             ["/", "Home"],
-            ["/properties", "All Properties"],
-            ["/properties?listing_type=SALE", "Buy"],
-            ["/properties?listing_type=RENT", "Rent"],
+            ["/properties", "Properties"],
             ["/blogs", "Articles"],
             ["/login", "Sign In"],
           ].map(([href, label], index) => (

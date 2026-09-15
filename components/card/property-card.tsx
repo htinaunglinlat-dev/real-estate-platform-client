@@ -1,89 +1,26 @@
-import { ArrowUpRight, Bath, BedDouble, MapPin, Maximize } from "lucide-react";
+import Link from "next/link";
+import { MapPin, Maximize } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import Image from "next/image";
-import Link from "next/link";
-import { formatLabel } from "@/lib/format/format-label";
+import { PropertyImage } from "@/components/property/property-image";
 import { formatPrice } from "@/lib/format/format-price";
 import type { Property } from "@/types/property";
 
 export function PropertyCard({ property }: { property: Property }) {
-  const cover =
-    property.images.find((image) => image.isCover) ?? property.images[0];
-
+  const cover = property?.images?.find((image) => image?.isCover) ?? property?.images?.[0];
+  const title = property?.title || "Untitled property";
+  const href = property?.slug ? `/properties/${encodeURIComponent(property.slug)}` : undefined;
+  const location = [property?.location?.township?.nameEn, property?.location?.region?.nameEn].filter(Boolean).join(", ");
+  const picture = <div className="relative aspect-4/3 overflow-hidden"><PropertyImage src={cover?.imageUrl} alt={title} sizes="(max-width: 768px) 100vw, 33vw" /><div className="absolute left-4 top-4 flex gap-2">{property?.listingType && <Badge className="capitalize">{property.listingType}</Badge>}{property?.isFeatured && <Badge variant="secondary">Featured</Badge>}</div></div>;
   return (
-    <Card className="group gap-0 py-0 overflow-hidden rounded-[1.4rem] border bg-surface transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-foreground/5">
-      <Link
-        href={`/properties/${property.slug}`}
-        className="relative block aspect-[4/3] overflow-hidden"
-      >
-        <Image
-          src={cover.imageUrl}
-          alt={property.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition duration-500 group-hover:scale-[1.03]"
-        />
-        <div className="absolute left-4 top-4 flex gap-2">
-          <Badge variant="secondary" className="rounded-full px-3 py-1.5">
-            {formatLabel(property.listingType)}
-          </Badge>
-          {property.isFeatured && (
-            <Badge className="rounded-full px-3 py-1.5">အထူးရွေးချယ်မှု</Badge>
-          )}
-        </div>
-      </Link>
+    <Card className="gap-0 overflow-hidden rounded-2xl bg-surface py-0">
+      {href ? <Link href={href} aria-label={`View ${title}`}>{picture}</Link> : picture}
       <div className="p-5">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-normal text-primary">
-              {formatLabel(property.propertyType)}
-            </p>
-            <Link href={`/properties/${property.slug}`}>
-              <h3 className="mt-2 font-serif text-xl leading-relaxed tracking-normal group-hover:text-brand">
-                {property.title}
-              </h3>
-            </Link>
-          </div>
-          <ArrowUpRight
-            className="mt-1 shrink-0 text-muted-foreground transition group-hover:text-brand"
-            size={19}
-          />
-        </div>
-        <p className="mt-3 flex items-center gap-1.5 text-sm text-muted-foreground">
-          <MapPin size={15} />
-          {property.location.township.nameMm}, {property.location.city.nameMm}
-        </p>
-        <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 border-t pt-4 text-xs text-muted-foreground">
-          {property.details.bedrooms !== undefined && (
-            <span className="flex items-center gap-1.5">
-              <BedDouble size={16} />
-              {property.details.bedrooms.toLocaleString("my-MM", {
-                numberingSystem: "mymr",
-              })}{" "}
-              အိပ်ခန်း
-            </span>
-          )}
-          {property.details.bathrooms !== undefined && (
-            <span className="flex items-center gap-1.5">
-              <Bath size={16} />
-              {property.details.bathrooms.toLocaleString("my-MM", {
-                numberingSystem: "mymr",
-              })}{" "}
-              ရေချိုးခန်း
-            </span>
-          )}
-          <span className="flex items-center gap-1.5">
-            <Maximize size={15} />
-            {property.areaValue.toLocaleString("my-MM", {
-              numberingSystem: "mymr",
-            })}{" "}
-            {formatLabel(property.areaUnit)}
-          </span>
-        </div>
-        <p className="mt-4 text-lg font-semibold text-primary">
-          {formatPrice(property.price, property.currency, property.priceType)}
-        </p>
+        {property?.propertyType && <p className="text-xs font-semibold uppercase text-primary">{property.propertyType}</p>}
+        <h2 className="mt-2 font-serif text-xl">{href ? <Link href={href} className="hover:text-primary">{title}</Link> : title}</h2>
+        {location && <p className="mt-3 flex gap-2 text-sm text-muted-foreground"><MapPin size={16} className="shrink-0" />{location}</p>}
+        {(property?.propertySize || property?.propertyFeatures) && <div className="mt-5 grid gap-2 border-t pt-4 text-sm text-muted-foreground">{property?.propertySize && <span className="flex items-center gap-2"><Maximize size={16} />{property.propertySize}</span>}{property?.propertyFeatures && <p>{property.propertyFeatures}</p>}</div>}
+        <p className="mt-4 text-lg font-semibold text-primary">{property?.price != null && Number.isFinite(property.price) ? formatPrice(property.price, property?.currency ?? "MMK", property?.priceType ?? "fixed") : "Price on request"}</p>
       </div>
     </Card>
   );

@@ -33,7 +33,7 @@ export interface City {
 
 export interface Township {
   id: number;
-  cityId: number;
+  cityId?: number;
   nameMm: string;
   nameEn: string;
   slug: string;
@@ -80,41 +80,48 @@ export interface PropertyDetails {
 }
 
 export interface Property {
-  id: number;
-  createdByAdminId: number;
-  regionId: number;
-  cityId: number;
-  townshipId: number;
+  id?: number;
+  createdByAdminId?: number;
+  regionId?: number;
+  cityId?: number;
+  townshipId?: number;
   wardId?: number;
-  title: string;
-  slug: string;
-  description: string;
-  listingType: ListingType;
-  propertyType: PropertyType;
-  status: PropertyStatus;
-  price: number;
-  currency: Currency;
-  priceType: PriceType;
-  areaValue: number;
-  areaUnit: AreaUnit;
-  street: string;
+  code?: string;
+  subtitle?: string | null;
+  localArea?: string | null;
+  propertySize?: string | null;
+  propertyFeatures?: string | null;
+  priceLabel?: string | null;
+  viewCount?: number;
+  title?: string;
+  slug?: string;
+  description?: string;
+  listingType?: ListingType;
+  propertyType?: PropertyType;
+  status?: PropertyStatus;
+  price?: number;
+  currency?: Currency;
+  priceType?: PriceType;
+  areaValue?: number;
+  areaUnit?: AreaUnit;
+  street?: string;
   landmark?: string;
-  addressDetail: string;
+  addressDetail?: string;
   latitude?: number;
   longitude?: number;
-  contactPhone: string;
+  contactPhone?: string;
   contactViber?: string;
   contactTelegram?: string;
-  isFeatured: boolean;
-  publishedAt: string;
-  createdAt: string;
-  updatedAt: string;
-  details: PropertyDetails;
-  images: PropertyImage[];
-  amenities: Amenity[];
-  location: {
+  isFeatured?: boolean;
+  publishedAt?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  details?: PropertyDetails;
+  images?: PropertyImage[];
+  amenities?: Amenity[];
+  location?: {
     region: Region;
-    city: City;
+    city?: City;
     township: Township;
     ward?: Ward;
   };
@@ -137,4 +144,72 @@ export interface PropertyFilterParams {
 export interface PropertyListResult {
   data: Property[];
   total: number;
+  meta?: PropertyListResponse["meta"];
+}
+
+interface PropertyResponseFields {
+  id: number;
+  created_by_admin_id: number;
+  region_id: number;
+  township_id: number;
+  local_area: string | null;
+  code: string;
+  title: string;
+  subtitle: string | null;
+  slug: string;
+  description: string;
+  listing_type: Uppercase<ListingType>;
+  property_type: Uppercase<PropertyType>;
+  status: Uppercase<PropertyStatus>;
+  price_lakhs: string;
+  price_label: string | null;
+  property_size: string | null;
+  property_features: string | null;
+  street: string;
+  landmark: string | null;
+  address_detail: string;
+  latitude: string | null;
+  longitude: string | null;
+  contact_phone: string;
+  contact_viber: string | null;
+  contact_telegram: string | null;
+  is_featured: boolean;
+  view_count: number;
+  published_at: string;
+  created_at: string;
+  updated_at: string;
+  region: import("@/types/region").RegionResponse;
+  township: import("@/types/region").RegionResponse;
+  images: {
+    id: number;
+    property_id: number;
+    image_url: string;
+    sort_order: number;
+    is_cover: boolean;
+  }[];
+  amenities: Amenity[];
+}
+
+export interface PropertyListResponse {
+  status_code: number;
+  message: string;
+  data?: (PropertyResponse | null)[] | null;
+  meta?: {
+    total: number;
+    page: number;
+    limit: number;
+    total_page: number;
+  };
+}
+
+// Backend fields and nested records may be absent or explicitly null.
+type NullableFields<T> = T extends (infer U)[]
+  ? (NullableFields<U> | null)[]
+  : T extends object
+    ? { [K in keyof T]?: NullableFields<T[K]> | null }
+    : T;
+
+export type PropertyResponse = NullableFields<PropertyResponseFields>;
+export interface PropertyDetailResponse {
+  data?: PropertyResponse | null;
 }

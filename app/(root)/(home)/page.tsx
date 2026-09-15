@@ -5,17 +5,16 @@ import Link from "next/link";
 import { Suspense } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { BlogCard } from "@/components/card/blog-card";
+import { ArticlesSection } from "@/components/article/articles-section";
+import { mockArticles } from "@/lib/data/mock-articles";
 import { PropertyCard } from "@/components/card/property-card";
 import { PropertyCardSkeleton } from "@/components/loading/property-card-skeleton";
 import { PropertySearch } from "@/components/form/property-search";
-import { useBlogs } from "@/hooks/use-blog";
 import { useProperties } from "@/hooks/use-property";
 import { PropertySearchSkeleton } from "@/components/loading/properties-explorer-skeleton";
 
 export default function HomePage() {
   const properties = useProperties({ limit: 6 });
-  const blogs = useBlogs();
 
   return (
     <>
@@ -157,32 +156,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-20">
-        <div className="flex flex-wrap items-end justify-between gap-5">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-normal text-primary">
-              Haven Articles
-            </p>
-
-            <h2 className="mt-3 font-serif text-3xl tracking-normal sm:text-3xl">
-              Helpful Insights for Home Seekers
-            </h2>
-          </div>
-
-          <Link
-            href="/blogs"
-            className="flex shrink-0 items-center gap-2 text-sm font-semibold text-brand"
-          >
-            Read Articles <ArrowRight size={17} />
-          </Link>
-        </div>
-
-        <div className="mt-10 grid gap-10 md:grid-cols-3">
-          {blogs.data?.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
-      </section>
+      <ArticlesSection posts={mockArticles.slice(0, 3)} />
     </>
   );
 }

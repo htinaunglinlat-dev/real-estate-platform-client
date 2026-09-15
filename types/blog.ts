@@ -1,12 +1,17 @@
+export interface BlogSection {
+  heading: string;
+  paragraphs: string[];
+}
+
 export interface BlogPost {
   id: number;
   title: string;
   slug: string;
   excerpt: string;
-  content: string[];
+  content: BlogSection[];
   category: string;
-  coverImage: string;
   author: string;
   publishedAt: string;
   readTime: number;
+  sources?: { title: string; url: string }[];
 }

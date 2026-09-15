@@ -29,26 +29,55 @@ export function PropertySearch() {
   }
 
   return (
-    <form onSubmit={search} className="grid gap-2 rounded border bg-card p-3 text-card-foreground shadow-xl shadow-black/10">
+    <form
+      onSubmit={search}
+      className="grid gap-2 rounded border bg-card p-3 text-card-foreground shadow-xl shadow-black/10"
+    >
       <div className="grid items-start gap-2 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
-        <PropertySearchInput value={filters.search ?? ""} onValueChange={(search) => void setFilters({ search: search || undefined })} />
-        <ListingTypeSelect value={filters.listing_type} onValueChange={(listing_type) => void setFilters({ listing_type })} />
+        <PropertySearchInput
+          value={filters.search ?? ""}
+          onValueChange={(search) =>
+            void setFilters({ search: search || undefined })
+          }
+        />
+        <ListingTypeSelect
+          value={filters.listing_type}
+          onValueChange={(listing_type) => void setFilters({ listing_type })}
+        />
         <RegionAndTownshipSelect filters={filters} onChange={setFilters} />
       </div>
       <div className="grid items-start gap-2 sm:grid-cols-2 lg:grid-cols-4">
-        <PropertyTypeSelect value={filters.property_type} onValueChange={(property_type) => void setFilters({ property_type })} />
+        <PropertyTypeSelect
+          value={filters.property_type}
+          onValueChange={(property_type) => void setFilters({ property_type })}
+        />
         <PriceSelect
           bound="min"
           value={filters.min_price_lakhs}
-          onValueChange={(min_price_lakhs) => void setFilters({
-            min_price_lakhs,
-            max_price_lakhs: min_price_lakhs !== undefined && filters.max_price_lakhs !== undefined && min_price_lakhs > filters.max_price_lakhs
-              ? undefined
-              : filters.max_price_lakhs,
-          })}
+          onValueChange={(min_price_lakhs) =>
+            void setFilters({
+              min_price_lakhs,
+              max_price_lakhs:
+                min_price_lakhs !== undefined &&
+                filters.max_price_lakhs !== undefined &&
+                min_price_lakhs > filters.max_price_lakhs
+                  ? undefined
+                  : filters.max_price_lakhs,
+            })
+          }
         />
-        <PriceSelect bound="max" value={filters.max_price_lakhs} min={filters.min_price_lakhs ?? 0} onValueChange={(max_price_lakhs) => void setFilters({ max_price_lakhs })} />
-        <Button type="submit" className="h-12 rounded px-6"><Search aria-hidden="true" />Search</Button>
+        <PriceSelect
+          bound="max"
+          value={filters.max_price_lakhs}
+          min={filters.min_price_lakhs ?? 0}
+          onValueChange={(max_price_lakhs) =>
+            void setFilters({ max_price_lakhs })
+          }
+        />
+        <Button type="submit" className="h-12 rounded px-6">
+          <Search aria-hidden="true" />
+          Search
+        </Button>
       </div>
     </form>
   );

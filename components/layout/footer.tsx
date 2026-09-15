@@ -8,29 +8,29 @@ export function Footer() {
         <div className="sm:col-span-2">
           <Logo />
           <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
-            မြန်မာနိုင်ငံတစ်ဝန်းရှိ ရွေးချယ်ထားသော အိမ်ခြံမြေများကို
-            အချက်အလက်ပြည့်စုံစွာ ရှာဖွေလိုက်ပါ။
+            Explore selected properties across Myanmar with the details you need
+            to find your next place.
           </p>
         </div>
         <div>
-          <p className="text-sm font-semibold">လေ့လာရန်</p>
+          <p className="text-sm font-semibold">Explore</p>
           <div className="mt-4 grid gap-3 text-sm text-muted-foreground">
-            <Link href="/properties">အိမ်ခြံမြေ အားလုံး</Link>
-            <Link href="/blogs">ဆောင်းပါးများ</Link>
-            <Link href="/login">အကောင့်ဝင်ရန်</Link>
+            <Link href="/properties">All Properties</Link>
+            <Link href="/blogs">Articles</Link>
+            <Link href="/login">Sign In</Link>
           </div>
         </div>
         <div>
-          <p className="text-sm font-semibold">ဆက်သွယ်ရန်</p>
+          <p className="text-sm font-semibold">Contact</p>
           <div className="mt-4 grid gap-2 text-sm text-muted-foreground">
             <a href="tel:+959450880220">+95 9 450 880 220</a>
             <a href="mailto:hello@haven.mm">hello@haven.mm</a>
-            <span>ရန်ကုန်၊ မြန်မာ</span>
+            <span>Yangon, Myanmar</span>
           </div>
         </div>
       </div>
       <div className="border-t px-5 py-5 text-center text-xs text-muted-foreground">
-        © ၂၀၂၆ ဟေဗင် အိမ်ခြံမြေ။ သင့်စိတ်ကြိုက် နေရာသစ်အတွက်။
+        © 2026 Haven Real Estate. Find your next place.
       </div>
     </footer>
   );

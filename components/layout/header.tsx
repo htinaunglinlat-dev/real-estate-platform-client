@@ -6,8 +6,6 @@ import { buttonVariants } from "@/components/ui/button";
 
 const links = [
   { href: "/properties", label: "Properties" },
-  { href: "/properties?listing_type=SALE", label: "Buy" },
-  { href: "/properties?listing_type=RENT", label: "Rent" },
   { href: "/blogs", label: "Articles" },
 ];
 
