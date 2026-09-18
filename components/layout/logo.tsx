@@ -21,7 +21,7 @@ export function Logo() {
 
       <div className="flex flex-col justify-center">
         <div className="flex items-baseline text-2xl font-bold leading-none tracking-tight sm:text-3xl">
-          <span className="text-foreground transition-colors duration-300 group-hover:text-primary">
+          <span className="text-foreground group-hover:text-primary">
             Zaw
           </span>
 

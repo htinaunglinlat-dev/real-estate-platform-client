@@ -1,7 +1,9 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Search } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { usePropertyFilters } from "@/hooks/use-property-filters";
 import { serializePropertySearch } from "@/lib/query/property-search-params";
 import { PropertySearchInput } from "@/components/input/property-search-input";
@@ -12,6 +14,7 @@ import { RegionAndTownshipSelect } from "@/components/select/region-and-township
 import { Button } from "@/components/ui/button";
 
 export function PropertySearch() {
+  const t = useTranslations("PropertySearch");
   const router = useRouter();
   const [filters, setFilters] = usePropertyFilters();
 
@@ -76,7 +79,7 @@ export function PropertySearch() {
         />
         <Button type="submit" className="h-12 rounded px-6">
           <Search aria-hidden="true" />
-          Search
+          {t("search")}
         </Button>
       </div>
     </form>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+
 import { useId } from "react";
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -21,6 +23,8 @@ export function LocationSelect({
   value, onValueChange, disabled, label, name, options, isLoading,
   isError, onRetry, placeholder, emptyMessage,
 }: Props) {
+  const t = useTranslations("PropertySearch");
+  const locale = useLocale();
   const id = useId();
   const unavailable = value !== undefined && !options.some((option) => option.id === value);
 
@@ -28,7 +32,7 @@ export function LocationSelect({
     <div className="grid min-w-0 content-start">
       <label htmlFor={id} className="sr-only">{label}</label>
       {isLoading && !disabled ? (
-        <div role="status" aria-label={`Fetching ${label.toLowerCase()}`}>
+        <div role="status" aria-label={t("fetchingLocation", { label })}>
           <Skeleton className="h-12 w-full rounded" />
         </div>
       ) : (
@@ -42,20 +46,20 @@ export function LocationSelect({
           className="w-full [&_select]:h-12 [&_select]:rounded [&_select]:bg-background"
         >
           <NativeSelectOption value="">
-            {disabled ? placeholder : isError && options.length === 0 ? `Unable to fetch ${label.toLowerCase()}` : options.length === 0 ? emptyMessage : placeholder}
+            {disabled ? placeholder : isError && options.length === 0 ? t("fetchLocationError", { label }) : options.length === 0 ? emptyMessage : placeholder}
           </NativeSelectOption>
-          {unavailable && <NativeSelectOption value={value} disabled>Selected {label.toLowerCase()} unavailable</NativeSelectOption>}
+          {unavailable && <NativeSelectOption value={value} disabled>{t("locationUnavailable", { label })}</NativeSelectOption>}
           {options.map((option) => (
             <NativeSelectOption key={option.id} value={option.id}>
-              {option.nameEn}
+              {locale === "my" ? option.nameMm || option.nameEn : option.nameEn}
             </NativeSelectOption>
           ))}
         </NativeSelect>
       )}
       {isError && !disabled && (
         <div id={`${id}-error`} role="alert" className="flex items-center gap-2 text-xs text-destructive">
-          Could not fetch {label.toLowerCase()}.
-          <Button type="button" variant="link" size="sm" onClick={onRetry}>Retry</Button>
+          {t("fetchLocationError", { label })}
+          <Button type="button" variant="link" size="sm" onClick={onRetry}>{t("retry")}</Button>
         </div>
       )}
     </div>

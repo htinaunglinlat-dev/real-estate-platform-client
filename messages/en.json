@@ -1,0 +1,120 @@
+{
+  "Header": {
+    "properties": "Properties",
+    "articles": "Articles",
+    "findProperty": "Find a Property",
+    "mainNavigation": "Main navigation"
+  },
+  "Footer": {
+    "description": "Explore selected properties across Myanmar with the details you need to find your next place.",
+    "explore": "Explore",
+    "allProperties": "All Properties",
+    "articles": "Articles",
+    "signIn": "Sign In",
+    "contact": "Contact",
+    "location": "Yangon, Myanmar",
+    "copyright": "© {year} Haven Real Estate. Find your next place."
+  },
+  "PropertySearch": {
+    "search": "Search",
+    "searchProperties": "Search properties",
+    "keywordPlaceholder": "Property name or keyword",
+    "listingType": "Sale / Rent",
+    "allListingTypes": "Sale & Rent",
+    "forSale": "For Sale",
+    "forRent": "For Rent",
+    "propertyType": "Property Type",
+    "allPropertyTypes": "All property types",
+    "propertyTypes": {
+      "HOUSE": "House",
+      "CONDO": "Condo",
+      "APARTMENT": "Apartment",
+      "LAND": "Land",
+      "SHOP": "Shop",
+      "OFFICE": "Office",
+      "WAREHOUSE": "Warehouse"
+    },
+    "minPrice": "Min price (lakhs)",
+    "maxPrice": "Max price (lakhs)",
+    "priceInLakhs": "{price} lakhs",
+    "region": "Region / State",
+    "allRegions": "All regions / states",
+    "noRegions": "No regions available",
+    "township": "Township",
+    "selectRegionFirst": "Select a region first",
+    "allTownships": "All townships",
+    "noTownships": "No townships available",
+    "fetchingLocation": "Fetching {label}",
+    "fetchLocationError": "Unable to fetch {label}.",
+    "locationUnavailable": "Selected {label} unavailable",
+    "retry": "Retry"
+  },
+  "Home": {
+    "Hero": {
+      "badge": "Find a place that feels right for you",
+      "title": "Find your dream home here.",
+      "description": "Explore homes, land, and properties across Myanmar with detailed information and find the place that best suits your needs.",
+      "verifiedProperties": "<strong>120+</strong> Verified Properties",
+      "townships": "<strong>14</strong> Townships",
+      "assistance": "<strong>Personal</strong> Assistance"
+    },
+    "FeaturedProperties": {
+      "eyebrow": "Selected for You",
+      "title": "Featured Properties",
+      "viewAll": "View All"
+    },
+    "Services": {
+      "eyebrow": "Haven Services",
+      "title": "Choose with confidence.",
+      "description": "We provide clear and reliable information and are always ready to offer guidance and support whenever you need it.",
+      "verified": {
+        "title": "Verified Information",
+        "description": "Property and ownership details are clearly and systematically presented."
+      },
+      "location": {
+        "title": "Location-Based Choices",
+        "description": "Find homes and locations that match your needs and preferences."
+      },
+      "support": {
+        "title": "Personal Support",
+        "description": "We support you from your first inquiry through property viewings."
+      }
+    }
+  },
+  "ArticlesSection": {
+    "eyebrow": "Haven Journal",
+    "title": "A little knowledge. A better decision.",
+    "description": "Practical reads on land, documents, and buying property in Myanmar.",
+    "viewAll": "View all articles"
+  },
+  "Blogs": {
+    "metadataTitle": "Articles | Haven",
+    "metadataDescription": "Myanmar-language guides to land types, property documents, site visits, and buying preparation.",
+    "journal": "Haven Journal",
+    "title": "Know more. Choose well.",
+    "description": "Explore practical guides to buying land and understanding property in Myanmar. Written in Myanmar, made for thoughtful decisions.",
+    "notFoundTitle": "Article not found | Haven",
+    "keepExploring": "Keep exploring",
+    "search": "Search articles",
+    "categoriesLabel": "Article categories",
+    "allArticles": "All articles",
+    "categories": {
+      "Land Types": "Land Types",
+      "Buying Guide": "Buying Guide",
+      "Site Visits": "Site Visits",
+      "Planning": "Planning"
+    },
+    "resultCount": "{count, plural, one {{count, number, localized} article} other {{count, number, localized} articles}}",
+    "emptyTitle": "No articles found",
+    "emptyDescription": "Try another keyword or explore all topics.",
+    "clearFilters": "Clear filters",
+    "backToArticles": "Back to articles",
+    "editorial": "Haven Editorial",
+    "contents": "In this article",
+    "furtherReading": "Further reading",
+    "disclaimer": "This article is for general information only. Verify the circumstances of each property and current regulations with the relevant authorities and a qualified legal professional.",
+    "readTime": "{minutes, number, localized} min read",
+    "readArticle": "Read article",
+    "readArticleLabel": "Read article: {title}"
+  }
+}

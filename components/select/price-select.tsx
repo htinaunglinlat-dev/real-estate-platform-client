@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 
 interface PriceSelectProps {
@@ -15,7 +17,8 @@ const prices = [
 ];
 
 export function PriceSelect({ bound, value, min = 0, onValueChange }: PriceSelectProps) {
-  const label = bound === "min" ? "Min price" : "Max price";
+  const t = useTranslations("PropertySearch");
+  const label = t(bound === "min" ? "minPrice" : "maxPrice");
   // Keep existing shared URLs readable even if their price is not a preset.
   const options = value !== undefined && !prices.includes(value)
     ? [...prices, value].sort((a, b) => a - b)
@@ -24,15 +27,15 @@ export function PriceSelect({ bound, value, min = 0, onValueChange }: PriceSelec
   return (
     <NativeSelect
       name={`${bound}_price_lakhs`}
-      aria-label={`${label} (lakhs)`}
+      aria-label={label}
       value={value ?? ""}
       onChange={(event) => onValueChange(event.target.value ? Number(event.target.value) : undefined)}
       className="w-full [&_select]:h-12 [&_select]:rounded [&_select]:bg-background"
     >
-      <NativeSelectOption value="">{label} (lakhs)</NativeSelectOption>
+      <NativeSelectOption value="">{label}</NativeSelectOption>
       {options.map((price) => (
         <NativeSelectOption key={price} value={price} disabled={price < min}>
-          {price.toLocaleString("en-US")} lakhs
+          {t("priceInLakhs", { price: price.toLocaleString("en-US") })}
         </NativeSelectOption>
       ))}
     </NativeSelect>

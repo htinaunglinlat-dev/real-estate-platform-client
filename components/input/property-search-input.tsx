@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { useId } from "react";
 import { Search } from "lucide-react";
 import { DebounceInput } from "@/components/input/debounce-input";
@@ -10,11 +12,12 @@ interface PropertySearchInputProps {
 }
 
 export function PropertySearchInput(props: PropertySearchInputProps) {
+  const t = useTranslations("PropertySearch");
   const id = useId();
   return (
     <div className="relative grid min-w-0">
       <label htmlFor={id} className="sr-only">
-        Search properties
+        {t("searchProperties")}
       </label>
       <Search
         aria-hidden="true"
@@ -24,7 +27,7 @@ export function PropertySearchInput(props: PropertySearchInputProps) {
         {...props}
         id={id}
         name="search"
-        placeholder="Property name or keyword"
+        placeholder={t("keywordPlaceholder")}
         className="h-12 rounded bg-background pl-10"
       />
     </div>

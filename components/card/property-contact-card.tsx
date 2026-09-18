@@ -1,5 +1,5 @@
 import { ArrowUpRight, MessageCircle, Phone, Send } from "lucide-react";
-import { CopyButton } from "@/components/common/copy-button";
+import { CopyButton } from "@/components/button/copy-button";
 import { buttonVariants } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format/format-price";
 import type { Property } from "@/types/property";
@@ -21,9 +21,10 @@ export function PropertyContactCard({ property }: { property: Property }) {
       label: "Viber number",
       value: property.contactViber?.trim(),
       copyValue: viber,
-      href: viber && /\d/.test(viber)
-        ? `viber://chat?number=${encodeURIComponent(viber)}`
-        : undefined,
+      href:
+        viber && /\d/.test(viber)
+          ? `viber://chat?number=${encodeURIComponent(viber)}`
+          : undefined,
       action: "Chat on Viber",
       icon: MessageCircle,
     },
@@ -31,9 +32,10 @@ export function PropertyContactCard({ property }: { property: Property }) {
       label: "Telegram username",
       value: telegram ? `@${telegram}` : undefined,
       copyValue: telegram,
-      href: telegram && /^[a-zA-Z0-9_]+$/.test(telegram)
-        ? `https://t.me/${telegram}`
-        : undefined,
+      href:
+        telegram && /^[a-zA-Z0-9_]+$/.test(telegram)
+          ? `https://t.me/${telegram}`
+          : undefined,
       action: "Chat on Telegram",
       icon: Send,
     },
@@ -47,11 +49,17 @@ export function PropertyContactCard({ property }: { property: Property }) {
         </p>
         <p className="break-words text-2xl font-semibold leading-snug text-primary">
           {property.price != null && Number.isFinite(property.price)
-            ? formatPrice(property.price, property.currency ?? "MMK", property.priceType ?? "fixed")
+            ? formatPrice(
+                property.price,
+                property.currency ?? "MMK",
+                property.priceType ?? "fixed",
+              )
             : "Price on request"}
         </p>
         {property.priceLabel && (
-          <p className="text-sm leading-relaxed text-muted-foreground">{property.priceLabel}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {property.priceLabel}
+          </p>
         )}
       </div>
 
@@ -65,32 +73,52 @@ export function PropertyContactCard({ property }: { property: Property }) {
           )}
         </div>
         <div className="space-y-3">
-          {contacts.map(({ label, value, copyValue, href, action, icon: Icon }) => (
-            <div key={label} className="rounded-xl border border-border/70 p-3">
-              <div className="flex items-center gap-2">
-                <Icon className="size-4 shrink-0 text-primary" aria-hidden="true" />
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs text-muted-foreground">{label}</p>
-                  <p className="mt-1 select-text break-all text-sm font-medium">{value}</p>
+          {contacts.map(
+            ({ label, value, copyValue, href, action, icon: Icon }) => (
+              <div
+                key={label}
+                className="rounded-xl border border-border/70 p-3"
+              >
+                <div className="flex items-center gap-2">
+                  <Icon
+                    className="size-4 shrink-0 text-primary"
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs text-muted-foreground">{label}</p>
+                    <p className="mt-1 select-text break-all text-sm font-medium">
+                      {value}
+                    </p>
+                  </div>
+                  <CopyButton
+                    key={value}
+                    value={copyValue || value!}
+                    label={label.toLowerCase()}
+                  />
                 </div>
-                <CopyButton key={value} value={copyValue || value!} label={label.toLowerCase()} />
+                {href && (
+                  <a
+                    href={href}
+                    target={
+                      label === "Telegram username" ? "_blank" : undefined
+                    }
+                    rel={
+                      label === "Telegram username"
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    className={buttonVariants({
+                      variant: label === "Phone number" ? "default" : "outline",
+                      className: "mt-3 h-11 w-full gap-2 rounded-lg",
+                    })}
+                  >
+                    {action}
+                    <ArrowUpRight aria-hidden="true" />
+                  </a>
+                )}
               </div>
-              {href && (
-                <a
-                  href={href}
-                  target={label === "Telegram username" ? "_blank" : undefined}
-                  rel={label === "Telegram username" ? "noopener noreferrer" : undefined}
-                  className={buttonVariants({
-                    variant: label === "Phone number" ? "default" : "outline",
-                    className: "mt-3 h-11 w-full gap-2 rounded-lg",
-                  })}
-                >
-                  {action}
-                  <ArrowUpRight aria-hidden="true" />
-                </a>
-              )}
-            </div>
-          ))}
+            ),
+          )}
           {contacts.length === 0 && (
             <p className="rounded-xl bg-muted/50 p-4 text-sm leading-relaxed text-muted-foreground">
               Contact information is not available yet.

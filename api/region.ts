@@ -11,7 +11,9 @@ import type {
 export async function getRegions(): Promise<RegionOption[]> {
   const response =
     await apiClient.get<LocationListResult<RegionResponse>>("/regions");
-  const regions = Array.isArray(response.data) ? response.data : response.data.data;
+  const regions = Array.isArray(response.data)
+    ? response.data
+    : response.data.data;
 
   return regions.map((region) => ({
     id: region.id,
@@ -29,7 +31,9 @@ export async function getTownships(
       params: filters,
     },
   );
-  const townships = Array.isArray(response.data) ? response.data : response.data.data;
+  const townships = Array.isArray(response.data)
+    ? response.data
+    : response.data.data;
 
   return townships.map((township) => ({
     id: township.id,
